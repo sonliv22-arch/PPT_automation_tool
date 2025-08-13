@@ -39,7 +39,7 @@ with st.form("data_form"):
 
 # --- ON SUBMIT ---
 if submit:
-    template_path = r"C:\Users\Rabi_Ram\OneDrive - infinite-uptime.com\Documents\PYtho Ruuning\template.pptx"
+    template_path = "template.pptx"
     prs = Presentation(template_path)
     
     date_format = "%d-%m-%Y"
