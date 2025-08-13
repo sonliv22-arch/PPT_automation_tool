@@ -9,12 +9,17 @@ import tempfile
 # --- Page config ---
 st.set_page_config(page_title="📝 PPT Data Entry", layout="centered")
 
-# --- Custom CSS for light blue background ---
+# --- Custom CSS for light blue background and black labels ---
 st.markdown(
     """
     <style>
     .stApp {
         background-color: #d0e7ff;  /* Light blue background */
+    }
+    /* Make labels and expander titles black */
+    label, .stExpander > div > div > div > span {
+        color: black !important;
+        font-weight: bold !important;
     }
     </style>
     """,
@@ -31,33 +36,51 @@ with st.form("data_form"):
 
     # --- Step 1: Basic Info ---
     with st.expander("1️⃣ Basic Information", expanded=True):
-        plant_name = st.text_input("Plant Name", placeholder="Enter Plant Name")
-        equipment_name = st.text_input("Equipment", placeholder="Enter Equipment Name")
-        case_enabler = st.text_input("Case Enabler", placeholder="Enter Case Enabler")
-        downtime_hours = st.text_input("Downtime Hours", placeholder="Enter downtime hours")
-        equipment_image = st.file_uploader("📷 Upload Equipment Image", type=['png','jpg','jpeg'])
+        st.markdown("**Plant Name**")
+        plant_name = st.text_input("", placeholder="Enter Plant Name")
+        st.markdown("**Equipment**")
+        equipment_name = st.text_input("", placeholder="Enter Equipment Name")
+        st.markdown("**Case Enabler**")
+        case_enabler = st.text_input("", placeholder="Enter Case Enabler")
+        st.markdown("**Downtime Hours**")
+        downtime_hours = st.text_input("", placeholder="Enter downtime hours")
+        st.markdown("**📷 Upload Equipment Image**")
+        equipment_image = st.file_uploader("", type=['png','jpg','jpeg'])
 
     # --- Step 2: Observation & Recommendation ---
     with st.expander("2️⃣ Observation & Recommendation"):
-        observation_date = st.date_input("Observation Date")
-        observation = st.text_input("Observation", placeholder="Enter observation details")
-        date_recommendation = st.date_input("Date of Recommendation")
-        recommendation = st.text_input("Recommendation", placeholder="Enter recommendation")
+        st.markdown("**Observation Date**")
+        observation_date = st.date_input("")
+        st.markdown("**Observation**")
+        observation = st.text_input("", placeholder="Enter observation details")
+        st.markdown("**Date of Recommendation**")
+        date_recommendation = st.date_input("")
+        st.markdown("**Recommendation**")
+        recommendation = st.text_input("", placeholder="Enter recommendation")
 
     # --- Step 3: Corrective Actions ---
     with st.expander("3️⃣ Corrective Actions"):
-        date_corrective_action = st.date_input("Date of Corrective Action Taken")
-        corrective_action_details = st.text_input("Corrective Action Details")
-        date_closed_report = st.date_input("Date of Closed Report")
-        closed_report_status = st.text_input("Closed Report Status")
+        st.markdown("**Date of Corrective Action Taken**")
+        date_corrective_action = st.date_input("")
+        st.markdown("**Corrective Action Details**")
+        corrective_action_details = st.text_input("")
+        st.markdown("**Date of Closed Report**")
+        date_closed_report = st.date_input("")
+        st.markdown("**Closed Report Status**")
+        closed_report_status = st.text_input("")
 
     # --- Step 4: Machine & Trends ---
     with st.expander("4️⃣ Machine Details & Trends"):
-        machine_details = st.text_area("Machine Details", placeholder="Enter machine details")
-        trend_for_image1 = st.text_input("Trend for Image-1", placeholder="Enter trend description")
-        trend_image1 = st.file_uploader("📷 Upload Trend Image 1", type=['png','jpg','jpeg'])
-        trend_for_image2 = st.text_input("Trend for Image-2", placeholder="Enter trend description")
-        trend_image2 = st.file_uploader("📷 Upload Trend Image 2", type=['png','jpg','jpeg'])
+        st.markdown("**Machine Details**")
+        machine_details = st.text_area("", placeholder="Enter machine details")
+        st.markdown("**Trend for Image-1**")
+        trend_for_image1 = st.text_input("", placeholder="Enter trend description")
+        st.markdown("**📷 Upload Trend Image 1**")
+        trend_image1 = st.file_uploader("", type=['png','jpg','jpeg'])
+        st.markdown("**Trend for Image-2**")
+        trend_for_image2 = st.text_input("", placeholder="Enter trend description")
+        st.markdown("**📷 Upload Trend Image 2**")
+        trend_image2 = st.file_uploader("", type=['png','jpg','jpeg'])
 
     submit = st.form_submit_button("✅ Generate PPT")
 
@@ -139,6 +162,6 @@ if submit:
     st.download_button(
         "⬇️ Download PPT",
         ppt_bytes,
-        file_name="output.pptx",
+        file_name=f"{equipment_name}_{plant_name}.pptx",
         mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
     )
