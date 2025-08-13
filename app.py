@@ -16,6 +16,10 @@ st.markdown(
     .stApp {
         background-color: #FFFDD0;  /* Light blue background */
     }
+    label, .stExpander > div > div > div > span {
+        color: black !important;
+        font-weight: bold !important;
+    }
     </style>
     """,
     unsafe_allow_html=True
