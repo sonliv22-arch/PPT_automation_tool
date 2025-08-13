@@ -9,13 +9,19 @@ import tempfile
 # --- Page config ---
 st.set_page_config(page_title="📝 PPT Data Entry", layout="centered")
 
-# --- Custom CSS for background and text styling ---
+# --- Custom CSS for blue page background and white form area ---
 st.markdown(
     """
     <style>
-    /* Light background for app content */
+    /* Page background blue */
     .stApp {
-        background-color: #fff8e1;  /* Cream color */
+        background-color: #a8d0e6;  /* Light blue */
+    }
+    /* Main content / form area */
+    .block-container {
+        background-color: #fff;  /* White form area */
+        padding: 2rem;
+        border-radius: 10px;
     }
     /* Header color */
     h1 {
