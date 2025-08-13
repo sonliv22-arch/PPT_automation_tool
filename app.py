@@ -9,6 +9,18 @@ import tempfile
 # --- Page config ---
 st.set_page_config(page_title="📝 PPT Data Entry", layout="centered")
 
+# --- Custom CSS for light blue background ---
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #d0e7ff;  /* Light blue background */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.markdown("<h1 style='text-align: center; color: darkblue;'>📊 PPT Data Entry Form</h1>", unsafe_allow_html=True)
 st.write("---")
 
