@@ -139,6 +139,6 @@ if submit:
     st.download_button(
         "⬇️ Download PPT",
         ppt_bytes,
-        file_name="output.pptx",
+        file_name=f"{equipment_name}_{plant_name}.pptx",
         mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
     )
