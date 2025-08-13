@@ -9,14 +9,14 @@ import tempfile
 # --- Page config ---
 st.set_page_config(page_title="📝 PPT Data Entry", layout="centered")
 
-# --- Custom CSS for light blue background ---
+# --- Custom CSS for cream background and black text ---
 st.markdown(
     """
     <style>
     .stApp {
-        background-color: #FFFDD0;  /* Light blue background */
+        background-color: #FFFDD0;  /* Cream background */
     }
-    label, .stExpander > div > div > div > span {
+    label, .stExpander > div > div > div > span, .stTextInput>div>div>input {
         color: black !important;
         font-weight: bold !important;
     }
@@ -33,7 +33,7 @@ date_format = "%d-%m-%Y"
 # --- FORM IN EXPANDERS ---
 with st.form("data_form"):
 
-    # --- Step 1: Basic Info ---
+    # Step 1: Basic Info (default expanded)
     with st.expander("1️⃣ Basic Information", expanded=True):
         plant_name = st.text_input("Plant Name", placeholder="Enter Plant Name")
         equipment_name = st.text_input("Equipment", placeholder="Enter Equipment Name")
@@ -41,22 +41,22 @@ with st.form("data_form"):
         downtime_hours = st.text_input("Downtime Hours", placeholder="Enter downtime hours")
         equipment_image = st.file_uploader("📷 Upload Equipment Image", type=['png','jpg','jpeg'])
 
-    # --- Step 2: Observation & Recommendation ---
-    with st.expander("2️⃣ Observation & Recommendation"):
+    # Step 2: Observation & Recommendation
+    with st.expander("2️⃣ Observation & Recommendation", expanded=True):
         observation_date = st.date_input("Observation Date")
         observation = st.text_input("Observation", placeholder="Enter observation details")
         date_recommendation = st.date_input("Date of Recommendation")
         recommendation = st.text_input("Recommendation", placeholder="Enter recommendation")
 
-    # --- Step 3: Corrective Actions ---
-    with st.expander("3️⃣ Corrective Actions"):
+    # Step 3: Corrective Actions
+    with st.expander("3️⃣ Corrective Actions", expanded=True):
         date_corrective_action = st.date_input("Date of Corrective Action Taken")
         corrective_action_details = st.text_input("Corrective Action Details")
         date_closed_report = st.date_input("Date of Closed Report")
         closed_report_status = st.text_input("Closed Report Status")
 
-    # --- Step 4: Machine & Trends ---
-    with st.expander("4️⃣ Machine Details & Trends"):
+    # Step 4: Machine & Trends
+    with st.expander("4️⃣ Machine Details & Trends", expanded=True):
         machine_details = st.text_area("Machine Details", placeholder="Enter machine details")
         trend_for_image1 = st.text_input("Trend for Image-1", placeholder="Enter trend description")
         trend_image1 = st.file_uploader("📷 Upload Trend Image 1", type=['png','jpg','jpeg'])
@@ -139,10 +139,13 @@ if submit:
     prs.save(ppt_bytes)
     ppt_bytes.seek(0)
 
+    # Dynamic output file name: Equipment_PlantName.pptx
+    output_file_name = f"{equipment_name}_{plant_name}.pptx"
+
     st.success("🎉 PPT generated successfully!")
     st.download_button(
         "⬇️ Download PPT",
         ppt_bytes,
-        file_name="output.pptx",
+        file_name=output_file_name,
         mime="application/vnd.openxmlformats-officedocument.presentationml.presentation"
     )
